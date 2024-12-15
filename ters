@@ -1,0 +1,24 @@
+const { ethers } = require('ethers');
+
+// Replace with a valid Ethereum RPC provider URL
+const provider = new ethers.JsonRpcProvider("https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID");
+
+// The Ethereum address to query
+const address = '0x5C69bEe701ef814a2B6a5B9Dfd2180cB54D1B45C';  // Replace with the address you want to check
+
+async function fetchENSDomain(address) {
+    try {
+        // Try to resolve the ENS name for the address
+        const ensName = await provider.lookupAddress(address);
+        
+        if (ensName) {
+            console.log(`The ENS name for address ${address} is: ${ensName}`);
+        } else {
+            console.log(`No ENS name found for address ${address}`);
+        }
+    } catch (error) {
+        console.error("Error fetching ENS domain:", error);
+    }
+}
+
+fetchENSDomain(address);
